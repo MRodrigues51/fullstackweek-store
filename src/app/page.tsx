@@ -1,9 +1,13 @@
-import Image from 'next/image'
+"use client";
+
+import { useSession } from "next-auth/react";
+import Image from "next/image";
 
 export default function Home() {
+  const { data } = useSession();
   return (
     <div>
-      <h1>Hello Word</h1>
+      <h1>{data?.user?.name}</h1>
     </div>
-  )
+  );
 }
