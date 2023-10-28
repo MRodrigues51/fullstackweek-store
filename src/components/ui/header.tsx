@@ -60,6 +60,7 @@ const Header = () => {
               <Separator />
             </div>
           )}
+
           <div className="mt-4 flex flex-col gap-3">
             {status === "unauthenticated" && (
               <Button
@@ -70,6 +71,7 @@ const Header = () => {
                 <LogInIcon size={16} />
                 Fazer Login
               </Button>
+              
             )}
 
             {status === "authenticated" && (
