@@ -116,9 +116,9 @@ const Header = () => {
       </Sheet>
 
       <Link href={`/`}>
-      <h1 className="text-lg font-semibold ">
-        <span className=" text-primary">FSW</span> Store
-      </h1>
+        <h1 className="text-lg font-semibold ">
+          <span className=" text-primary">FSW</span> Store
+        </h1>
       </Link>
 
       <Button size="icon" variant="outline">
