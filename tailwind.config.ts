@@ -20,6 +20,7 @@ module.exports = {
         'category-item-background': 'linear-gradient(45deg, #5033C3 0%, rgba(80, 51, 195, 0.20) 100%);'
       },
       colors: {
+        'card-send-truck': "#8162FF",
         border: "hsl(var(--border))",
         input: "hsl(var(--input))",
         ring: "hsl(var(--ring))",
