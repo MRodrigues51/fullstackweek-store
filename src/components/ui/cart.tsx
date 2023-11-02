@@ -53,7 +53,8 @@ const Cart = () => {
       </div>
 
       <div>
-        <div className="flex flex-col gap-3">
+        {products.length > 0 && (
+          <div className="flex flex-col gap-3">
           <Separator />
           <div className="flex items-center justify-between text-xs">
             <p>Subtotal</p>
@@ -80,6 +81,7 @@ const Cart = () => {
 
           <Button className="font-bold uppercase mt-7" onClick={handleFinishPurchaseClick}>Finalizar Compra</Button>
         </div>
+        )}
       </div>
     </div>
   );
