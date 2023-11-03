@@ -1,6 +1,6 @@
 "use client";
 import { ProductWithTotalPrice } from "@/helpers/products";
-import { ReactNode, createContext, useMemo, useState } from "react";
+import { ReactNode, createContext, useEffect, useMemo, useState } from "react";
 
 export interface CartProduct extends ProductWithTotalPrice {
   quantity: number;
@@ -29,27 +29,33 @@ export const CartContext = createContext<ICartContext>({
   subtotal: 0,
   totalDiscount: 0,
   addProductToCart: () => {},
-  decreaseProductQuantity:  () => {},
-  increaseProductQuantity:  () => {},
-  removeProductFromCart:  () => {},
+  decreaseProductQuantity: () => {},
+  increaseProductQuantity: () => {},
+  removeProductFromCart: () => {},
 });
 
 const CartProvider = ({ children }: { children: ReactNode }) => {
-  const [products, setProducts] = useState<CartProduct[]>([]);3
+  const [products, setProducts] = useState<CartProduct[]>(
+    JSON.parse(localStorage.getItem("@fsw-store/cart-products") || "[]"),
+  );
+
+  useEffect(() => {
+    localStorage.setItem("@fsw-store/cart-products", JSON.stringify(products));
+  }, [products]);
 
   // Total sem desconto
   const subtotal = useMemo(() => {
     return products.reduce((acc, product) => {
       return acc + Number(product.basePrice) * product.quantity;
     }, 0);
-  }, [products])
+  }, [products]);
 
   //Total com desconto
   const total = useMemo(() => {
     return products.reduce((acc, product) => {
       return acc + product.totalPrice * product.quantity;
     }, 0);
-  }, [products])
+  }, [products]);
 
   // Valor dos descontos
   const totalDiscount = subtotal - total;
@@ -105,22 +111,21 @@ const CartProvider = ({ children }: { children: ReactNode }) => {
     // aumenta em 1 a quantidadedo carrinho
 
     setProducts((prev) =>
-      prev
-        .map((cartProduct) => {
-          if (cartProduct.id === productId) {
-            return {
-              ...cartProduct,
-              quantity: cartProduct.quantity + 1,
-            };
-          }
-          return cartProduct;
-        })
+      prev.map((cartProduct) => {
+        if (cartProduct.id === productId) {
+          return {
+            ...cartProduct,
+            quantity: cartProduct.quantity + 1,
+          };
+        }
+        return cartProduct;
+      }),
     );
   };
 
   const removeProductFromCart = (productId: String) => {
     setProducts((prev) =>
-      prev.filter((cartProduct) => cartProduct.id!== productId),
+      prev.filter((cartProduct) => cartProduct.id !== productId),
     );
   };
 
