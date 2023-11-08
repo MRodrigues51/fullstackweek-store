@@ -1,5 +1,4 @@
-import { useSession } from "next-auth/react";
-import Image from "next/image";
+
 import Categories from "./components/categories";
 import { prismaClient } from "@/lib/prisma";
 import ProductList from "../../components/ui/product-list";
@@ -7,7 +6,7 @@ import SectionTitle from "../../components/ui/section-title";
 import PromoBanner from "./components/promo-banner";
 
 export default async function Home() {
-  // const { data } = useSession();
+  
   const deals = await prismaClient.product.findMany({
     where: {
       discountPercentage: {
@@ -36,9 +35,7 @@ export default async function Home() {
       <PromoBanner
         src="/banner-home-01.png"
         alt="até 55% de desconto esse mês"
-      />
-      {/* <h1>{data?.user?.name}</h1> */}
-
+      />    
       <div className=" px-5">
         <Categories />
       </div>
