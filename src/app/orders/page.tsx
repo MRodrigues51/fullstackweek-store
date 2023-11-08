@@ -12,9 +12,9 @@ async function OrderPage() {
 
   if (!session || !session.user) {
     return (
-      <div className="flex flex-col items-center justify-center">
-        <p className="mt-8">Acesso negado.</p>
-        <p>Faça o login para ter acesso!</p>
+      <div className="flex h-full flex-col items-center justify-center gap-2 p-5">
+        <h2 className="font-bold">Acesso Negado!</h2>
+        <p className="text-sm opacity-60">Faça login para ver seus pedidos</p>
       </div>
     );
   }
@@ -32,16 +32,17 @@ async function OrderPage() {
     },
   });
   return (
-    <div className="p-5">
-      <Badge
-        className=" w-fit gap-1 border-2 border-primary px-3 py-[0.375rem] text-base uppercase"
-        variant="outline"
+    <div className="p-5 lg:container lg:mx-auto lg:py-10">
+      <Badge        
+        variant="heading"
       >
         <PackageSearchIcon size={16} />
         Meus Pedidos
       </Badge>
       {orders.length === 0 ? (
-        <p className="mt-5 flex flex-col gap-5">Você ainda não fez nenhuma compra, vamos às compras?</p>
+        <p className="mt-5 flex flex-col gap-5">
+          Você ainda não fez nenhuma compra, vamos às compras?
+        </p>
       ) : (
         <div className="mt-5 flex flex-col gap-5">
           {orders.map((order) => (
